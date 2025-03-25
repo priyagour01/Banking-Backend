@@ -1,0 +1,16 @@
+const express = require("express")
+const app = express()
+const cors = require("cors")
+const bodyParser = require("body-parser")
+require("dotenv").config()
+const port = process.env.PORT || 8000
+const dbConnect = require("./utils/db")
+const route = require("./route/route")
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use("/costumer", route )
+dbConnect()
+app.listen(port, ()=>{
+    console.log(`Server is running on port ${port}`)
+})
